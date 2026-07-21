@@ -1,0 +1,19 @@
+#!/bin/bash
+# Symphony Java启动脚本
+
+# 获取脚本所在目录
+SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
+PROJECT_DIR="$(dirname "$SCRIPT_DIR")"
+
+# JAR文件路径
+JAR_FILE="$PROJECT_DIR/target/symphony-akka-0.1.0.jar"
+
+# 检查JAR文件是否存在
+if [ ! -f "$JAR_FILE" ]; then
+    echo "Error: JAR file not found at $JAR_FILE"
+    echo "Please run 'mvn package' first"
+    exit 1
+fi
+
+# 运行Java应用
+exec java -jar "$JAR_FILE" "$@"
